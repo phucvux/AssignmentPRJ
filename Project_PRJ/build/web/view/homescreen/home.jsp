@@ -16,7 +16,7 @@
 	
 	<nav>
 		<ul>
-			<li><a href="#">Class Time Table</a></li>
+			<li><a href="timetable">Class Time Table</a></li>
 			<li><a href="#">Attendance</a></li>
 		</ul>
 	</nav>
