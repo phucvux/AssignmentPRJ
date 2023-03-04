@@ -5,7 +5,7 @@
 package controller;
 
 import dal.DBContext;
-import dal.LessonDBContext;
+import dal.ListCourseDBContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,13 +13,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import model.Lesson;
+import model.Course;
+
+
 
 /**
  *
  * @author CucLe
  */
-public class TimetableController extends HttpServlet {
+public class AttendanceController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,10 +34,6 @@ public class TimetableController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DBContext<Lesson> db = new LessonDBContext();
-        ArrayList<Lesson> lessons = db.all();
-        request.setAttribute("lessons", lessons);
-        request.getRequestDispatcher("../view/function/timetable.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,7 +48,10 @@ public class TimetableController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         DBContext<Course> db = new ListCourseDBContext();
+        ArrayList<Course> courses = db.all();
+        request.setAttribute("courses", courses);
+        request.getRequestDispatcher("../view/function/attendance.jsp").forward(request, response);
     }
 
     /**

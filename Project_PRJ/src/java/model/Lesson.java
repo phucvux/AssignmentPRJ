@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author CucLe
@@ -16,7 +18,17 @@ public class Lesson {
     private Room room = new Room();
     private Course course = new Course();
     private Group group = new Group();
-    private Checkstatus checkstatus = new Checkstatus();
+    private ArrayList<Checkstatus> status = new ArrayList<>();
+
+    public ArrayList<Checkstatus> getStatus() {
+        return status;
+    }
+
+    public void setStatus(ArrayList<Checkstatus> status) {
+        this.status = status;
+    }
+    
+    
     
     public int getLid() {
         return lid;
@@ -73,14 +85,4 @@ public class Lesson {
     public void setGroup(Group group) {
         this.group = group;
     }
-
-    public Checkstatus getCheckstatus() {
-        return checkstatus;
-    }
-
-    public void setCheckstatus(Checkstatus checkstatus) {
-        this.checkstatus = checkstatus;
-    }
-    
-    
 }

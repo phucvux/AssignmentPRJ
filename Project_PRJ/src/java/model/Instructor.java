@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author CucLe
@@ -11,6 +13,26 @@ package model;
 public class Instructor {
     private int insid;
     private String insname;
+    private ArrayList<Lesson> lesson = new ArrayList<>();
+    private ArrayList<Group> group = new ArrayList<>();
+
+    public ArrayList<Lesson> getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(ArrayList<Lesson> lesson) {
+        this.lesson = lesson;
+    }
+
+    public ArrayList<Group> getGroup() {
+        return group;
+    }
+
+    public void setGroup(ArrayList<Group> group) {
+        this.group = group;
+    }
+    
+    
 
     public int getInsid() {
         return insid;

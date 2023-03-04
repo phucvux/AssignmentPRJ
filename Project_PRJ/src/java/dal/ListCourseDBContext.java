@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Checkstatus;
 import model.Course;
 import model.Lesson;
 import model.Room;
@@ -20,70 +19,44 @@ import model.Timeslot;
  *
  * @author CucLe
  */
-public class LessonDBContext extends DBContext<Lesson> {
+public class ListCourseDBContext extends DBContext<Course> {
 
     @Override
-    public void insert(Lesson model) {
+    public void insert(Course model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void update(Lesson model) {
+    public void update(Course model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void delete(Lesson model) {
+    public void delete(Course model) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Lesson get(int id) {
+    public Course get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<Lesson> all() {
-        ArrayList<Lesson> lessons = new ArrayList<>();
+    public ArrayList<Course> all() {
+        ArrayList<Course> courses = new ArrayList<>();
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "select timeslot.slot_name,\n"
-                    + "		course.cname,\n"
-                    + "		room.rname,\n"
-                    + "         checkstatus.date,\n"
-                    + "         checkstatus.[status]\n"
-                    + "			\n"
-                    + "		from lesson\n"
-                    + "		join room on lesson.rid = room.rid\n"
-                    + "		join timeslot on lesson.tid = timeslot.tid\n"
-                    + "		join course on lesson.cid = course.cid\n"
-                    +"          join checkstatus on lesson.lid = checkstatus.lid "
-                    + "		order by slot_name	";
+            String sql = "SELECT Count(*)\n"
+                    + "		from course	";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
-                Lesson l = new Lesson();
-
-                Timeslot t = new Timeslot();
-                t.setSlot_name(rs.getString("slot_name"));
-                l.setTimeslot(t);
-
                 Course c = new Course();
+                int numSubject = rs.getInt(1);
                 c.setCid(rs.getInt("cid"));
                 c.setCname(rs.getString("cname"));
-                l.setCourse(c);
-
-                Room r = new Room();
-                r.setRname(rs.getString("rname"));
-                l.setRoom(r);
-                
-//                Checkstatus s = new Checkstatus();
-//                s.setDate(rs.getDate("date"));
-//                s.setStatus(rs.getBoolean("status"));
-//                l.setStatus(s);
-
-                lessons.add(l);
+                courses.add(c);
             }
         } catch (SQLException ex) {
             Logger.getLogger(LessonDBContext.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,6 +78,7 @@ public class LessonDBContext extends DBContext<Lesson> {
                 Logger.getLogger(LessonDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return lessons;
+        return courses;
     }
+
 }

@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +16,17 @@ public class Timeslot {
     private Time start_time;
     private Time end_time;
     private String slot_name;
+    private ArrayList<Lesson> lesson = new ArrayList<>();
+
+    public ArrayList<Lesson> getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(ArrayList<Lesson> lesson) {
+        this.lesson = lesson;
+    }
+    
+    
 
     public int getTid() {
         return tid;

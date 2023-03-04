@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author CucLe
@@ -11,6 +13,17 @@ package model;
 public class Student {
     private int sid;
     private int sname;
+    private ArrayList<Checkstatus> status = new ArrayList<>();
+
+    public ArrayList<Checkstatus> getStatus() {
+        return status;
+    }
+
+    public void setStatus(ArrayList<Checkstatus> status) {
+        this.status = status;
+    }
+    
+    
 
     public int getSid() {
         return sid;

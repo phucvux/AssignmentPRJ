@@ -4,13 +4,14 @@
     Author     : CucLe
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-         <style>
+        <style>
             table {
                 border-collapse: collapse;
                 width: 100%;
@@ -38,26 +39,15 @@
                 <td>FRI</td>
                 <td>SAT</td>
                 <td>SUN</td>
-                
+
             </tr>
-            
+
             <tr>
-            <td>Slot 1</td>
-           
-        </tr>
-        <tr>
-            <td>Slot 2</td>
-         
-        </tr>
-        <tr>
-            <td>Slot 3</td>
-        
-        </tr>
-        <tr>
-            <td>Slot 4</td>
-    
-        </tr>
-            
+                <c:forEach items="${requestScope.lessons}" var="l" varStatus="loop">
+                    <td>${l.course.cname}</td>
+                </c:forEach>
+            </tr>
+
         </table>
     </body>
 </html>

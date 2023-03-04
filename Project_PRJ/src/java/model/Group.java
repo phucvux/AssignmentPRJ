@@ -4,15 +4,27 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author CucLe
  */
 public class Group {
+
     private int gid;
     private String gname;
     private Course course = new Course();
     private Instructor instructor = new Instructor();
+    private ArrayList<Lesson> lesson = new ArrayList<>();
+
+    public ArrayList<Lesson> getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(ArrayList<Lesson> lesson) {
+        this.lesson = lesson;
+    }
 
     public int getGid() {
         return gid;
@@ -45,6 +57,5 @@ public class Group {
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
-    
-    
+
 }

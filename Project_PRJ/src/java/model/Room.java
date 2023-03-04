@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author CucLe
@@ -11,6 +13,17 @@ package model;
 public class Room {
     private int rid;
     private String rname;
+    private ArrayList<Lesson> lesson = new ArrayList<>();
+
+    public ArrayList<Lesson> getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(ArrayList<Lesson> lesson) {
+        this.lesson = lesson;
+    }
+    
+    
 
     public int getRid() {
         return rid;

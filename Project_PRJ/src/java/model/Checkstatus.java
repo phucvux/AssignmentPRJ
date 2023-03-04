@@ -13,10 +13,19 @@ import java.util.ArrayList;
  */
 public class Checkstatus {
     private Student student = new Student();
-    private ArrayList<Lesson> lesson = new ArrayList<>();
+    private Lesson lesson = new Lesson();
     private boolean status;
     private Date date;
 
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
+    }
+
+    
     
     public Student getStudent() {
         return student;
@@ -25,17 +34,7 @@ public class Checkstatus {
     public void setStudent(Student student) {
         this.student = student;
     }
-
-    public ArrayList<Lesson> getLesson() {
-        return lesson;
-    }
-
-    public void setLesson(ArrayList<Lesson> lesson) {
-        this.lesson = lesson;
-    }
-
-
-
+    
     public boolean isStatus() {
         return status;
     }
