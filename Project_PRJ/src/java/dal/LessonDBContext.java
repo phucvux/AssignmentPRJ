@@ -50,15 +50,13 @@ public class LessonDBContext extends DBContext<Lesson> {
         try {
             String sql = "select timeslot.slot_name,\n"
                     + "		course.cname,\n"
-                    + "		room.rname,\n"
-                    + "         checkstatus.date,\n"
-                    + "         checkstatus.[status]\n"
+                    + "		room.rname"
                     + "			\n"
                     + "		from lesson\n"
                     + "		join room on lesson.rid = room.rid\n"
                     + "		join timeslot on lesson.tid = timeslot.tid\n"
                     + "		join course on lesson.cid = course.cid\n"
-                    +"          join checkstatus on lesson.lid = checkstatus.lid "
+                   
                     + "		order by slot_name	";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
@@ -70,7 +68,6 @@ public class LessonDBContext extends DBContext<Lesson> {
                 l.setTimeslot(t);
 
                 Course c = new Course();
-                c.setCid(rs.getInt("cid"));
                 c.setCname(rs.getString("cname"));
                 l.setCourse(c);
 

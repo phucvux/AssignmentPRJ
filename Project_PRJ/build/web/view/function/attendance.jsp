@@ -37,11 +37,12 @@
                 <td>Subject</td>
             </tr>
             
-            <tr>
-                <td>
-                   
-                </td>
-            </tr>
+                <c:forEach items="${requestScope.courses}" var="c" varStatus="loop">                 
+                <tr>
+                    <td>${c.cid}</td>
+                    <td><a href="">${c.cname}</a></td>
+                </tr>
+                </c:forEach>      
         </table>
     </body>
 </html>

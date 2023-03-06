@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Course;
-import model.Lesson;
-import model.Room;
-import model.Timeslot;
+
 
 /**
  *
@@ -47,38 +45,37 @@ public class ListCourseDBContext extends DBContext<Course> {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT Count(*)\n"
+            String sql = "SELECT	course.cid,\n"
+                    + "		course.cname \n"
                     + "		from course	";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Course c = new Course();
-                int numSubject = rs.getInt(1);
                 c.setCid(rs.getInt("cid"));
                 c.setCname(rs.getString("cname"));
                 courses.add(c);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LessonDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListCourseDBContext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 rs.close();
             } catch (SQLException ex) {
-                Logger.getLogger(LessonDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListCourseDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             try {
                 stm.close();
             } catch (SQLException ex) {
-                Logger.getLogger(LessonDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListCourseDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
             try {
                 connection.close();
             } catch (SQLException ex) {
-                Logger.getLogger(LessonDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ListCourseDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return courses;
     }
-
 }

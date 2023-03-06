@@ -34,6 +34,7 @@ public class AttendanceController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+               
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,7 +49,7 @@ public class AttendanceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         DBContext<Course> db = new ListCourseDBContext();
+        DBContext<Course> db = new ListCourseDBContext();
         ArrayList<Course> courses = db.all();
         request.setAttribute("courses", courses);
         request.getRequestDispatcher("../view/function/attendance.jsp").forward(request, response);
