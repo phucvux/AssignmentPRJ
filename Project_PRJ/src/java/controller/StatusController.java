@@ -4,26 +4,18 @@
  */
 package controller;
 
-import change_date.DateTimeHelper;
-import dal.DBContext;
-import dal.LessonDBContext;
-import dal.TimeSlotDBContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.util.ArrayList;
-import model.Lesson;
-import model.Timeslot;
 
 /**
  *
  * @author CucLe
  */
-public class TimetableController extends HttpServlet {
+public class StatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,21 +28,19 @@ public class TimetableController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         int sid = Integer.parseInt(request.getParameter("sid"));
-        Date from = Date.valueOf(request.getParameter("from"));
-        Date to = Date.valueOf(request.getParameter("to"));
-        
-          ArrayList<Date> dates = DateTimeHelper.getListDate(from, to);
-        request.setAttribute("dates", dates);
-        
-         TimeSlotDBContext timeDB = new TimeSlotDBContext();
-        ArrayList<Timeslot> slots = timeDB.all();
-        request.setAttribute("slots", slots);
-        
-        LessonDBContext ldbc = new LessonDBContext();
-        ArrayList<Lesson> lessons = ldbc.getTimeTable(sid, from, to);
-        request.setAttribute("lessons", lessons);
-        request.getRequestDispatcher("../view/function/timetable.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet StatusController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet StatusController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

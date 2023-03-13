@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class Lesson {
     private int lid;
     private String lname;
-    private Instructor instructor = new Instructor();
-    private Timeslot timeslot = new Timeslot();
-    private Room room = new Room();
-    private Course course = new Course();
-    private Group group = new Group();
+    private Instructor instructor;
+    private Timeslot timeslot;
+    private Room room ;
+    private Course course;
+    private Group group;
     private ArrayList<Checkstatus> status = new ArrayList<>();
 
     public ArrayList<Checkstatus> getStatus() {

@@ -14,8 +14,8 @@ public class Group {
 
     private int gid;
     private String gname;
-    private Course course = new Course();
-    private Instructor instructor = new Instructor();
+    private Course course ;
+    private Instructor instructor;
     private ArrayList<Lesson> lesson = new ArrayList<>();
 
     public ArrayList<Lesson> getLesson() {

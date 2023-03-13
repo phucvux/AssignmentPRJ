@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author CucLe
  */
 public class Checkstatus {
-    private Student student = new Student();
-    private Lesson lesson = new Lesson();
+    private Student student ;
+    private Lesson lesson ;
     private boolean status;
     private Date date;
 

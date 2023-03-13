@@ -31,6 +31,7 @@
         </style>
     </head>
     <body>
+        <h1>Attendance Report</h1>
         <table border = "1px">
             <tr>
                 <td>No.</td>
