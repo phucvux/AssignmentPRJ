@@ -1,9 +1,3 @@
-<%-- 
-    Document   : attendance
-    Created on : Mar 4, 2023, 6:52:31 PM
-    Author     : CucLe
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,8 +8,8 @@
         <style>
             table {
                 border-collapse: collapse;
-                width: 50%; /* changed from 100% */
-                margin: 0 auto; /* added to center table */
+                width: 50%;
+                margin: 0 auto;
             }
             th, td {
                 text-align: center;
@@ -32,18 +26,51 @@
     </head>
     <body>
         <h1>Attendance Report</h1>
-        <table border = "1px">
-            <tr>
-                <td>No.</td>
-                <td>Subject</td>
-            </tr>
-            
-                <c:forEach items="${requestScope.courses}" var="c" varStatus="loop">                 
+        <form method="post">
+            <label for="courseSelect">Select a course:</label>
+            <select id="courseSelect" name="courseSelect">
+                <option value="">--Select a course--</option>
+                <c:forEach items="${requestScope.courses}" var="c">
+                    <option value="${c.cid}">${c.cname}</option>
+                </c:forEach>
+            </select>
+            <br/>
+            <input type="submit" value="Submit">
+        </form>
+        <c:if test="${not empty param.courseSelect}">
+            <table border="1px">
                 <tr>
-                    <td>${c.cid}</td>
-                    <td><a href="">${c.cname}</a></td>
+                    <th>No.</th>
+                    <th>Date</th>
+                    <th>Slot</th>
+                    <th>Status</th>               
                 </tr>
-                </c:forEach>      
-        </table>
+                <c:set var="index" value="0"/>
+                <c:forEach items="${requestScope.lessons}" var="l">
+                    <c:if test="${l.course.cid eq param.courseSelect}">
+                        <tr>
+                            <c:set var="index" value="${index+1}"/>
+                            <td>${index}</td>  
+                            <c:forEach items="${l.status}" var="s">
+                                <td>${s.date}</td>
+                            </c:forEach>
+                            <<td>${l.timeslot.slot_name}</td>
+                            <c:forEach items="${l.status}" var="s">
+                                <c:if test="${s.status}">
+                                    <td style="color: green">present</td>
+                                </c:if>
+                                <c:if test="${s.status == '0'}">
+                                    <td style="color: red">absent</td>
+                                </c:if>
+                                <c:if test="${s.status == null}">
+                                    <td>not yet</td>
+                                </c:if>
+                            </c:forEach>
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </table>
+        </c:if>
+
     </body>
 </html>

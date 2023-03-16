@@ -10,8 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Checkstatus;
 import model.Course;
-
+import model.Lesson;
+import model.Timeslot;
 
 /**
  *
@@ -45,15 +47,16 @@ public class ListCourseDBContext extends DBContext<Course> {
         PreparedStatement stm = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT	course.cid,\n"
-                    + "		course.cname \n"
-                    + "		from course	";
+            String sql = "select course.cid,\n"
+                    + "		course.cname\n"
+                    + "	from course";
             stm = connection.prepareStatement(sql);
             rs = stm.executeQuery();
             while (rs.next()) {
                 Course c = new Course();
                 c.setCid(rs.getInt("cid"));
                 c.setCname(rs.getString("cname"));
+
                 courses.add(c);
             }
         } catch (SQLException ex) {

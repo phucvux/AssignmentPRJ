@@ -20,7 +20,7 @@ public class Lesson {
     private Group group;
     private ArrayList<Checkstatus> status = new ArrayList<>();
 
-    public ArrayList<Checkstatus> getStatus() {
+    public ArrayList<Checkstatus> getStatus() { 
         return status;
     }
 
