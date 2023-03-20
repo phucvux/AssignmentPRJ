@@ -4,18 +4,20 @@
  */
 package controller;
 
+import controller.authentic.BaseRequiredAuthenticatedController;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import model.User;
 
 /**
  *
  * @author CucLe
  */
-public class home extends HttpServlet {
+public class home extends BaseRequiredAuthenticatedController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,7 +30,7 @@ public class home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("../view/homescreen/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/homescreen/home.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -41,7 +43,7 @@ public class home extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, User user)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -55,7 +57,7 @@ public class home extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, User user)
             throws ServletException, IOException {
         processRequest(request, response);
     }

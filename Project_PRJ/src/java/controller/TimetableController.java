@@ -4,26 +4,34 @@
  */
 package controller;
 
-import change_date.DateTimeHelper;
+import controller.authentic.BaseRequiredAuthenticatedController;
 import dal.DBContext;
 import dal.LessonDBContext;
 import dal.TimeSlotDBContext;
+import dal.UserDBContext;
+import date.DateTimeHelper;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Lesson;
 import model.Timeslot;
+import model.User;
 
 /**
  *
  * @author CucLe
  */
-public class TimetableController extends HttpServlet {
+public class TimetableController extends BaseRequiredAuthenticatedController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,22 +43,38 @@ public class TimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-         int sid = Integer.parseInt(request.getParameter("sid"));
-        Date from = Date.valueOf(request.getParameter("from"));
-        Date to = Date.valueOf(request.getParameter("to"));
-        
-          ArrayList<Date> dates = DateTimeHelper.getListDate(from, to);
-        request.setAttribute("dates", dates);
-        
-         TimeSlotDBContext timeDB = new TimeSlotDBContext();
+            throws ServletException, IOException, ParseException {
+        User u = (User) request.getSession().getAttribute("user");
+        int sid = u.getUid();
+//        int sid = Integer.parseInt(request.getParameter("uid"));
+
+        String date = request.getParameter("date");
+        if(date==null){
+            date = DateTimeHelper.getCurrentDate().toString();
+        }
+        ArrayList<Date> weekDays = DateTimeHelper.getWeekFromDate(date);
+
+        request.setAttribute("weekDays", weekDays);
+        Date from = weekDays.get(0);
+        Date to = weekDays.get(weekDays.size() - 1);
+     
+//        String from2 = request.getParameter("from");
+//        String to2 = request.getParameter("to");
+        TimeSlotDBContext timeDB = new TimeSlotDBContext();
         ArrayList<Timeslot> slots = timeDB.all();
         request.setAttribute("slots", slots);
-        
+
         LessonDBContext ldbc = new LessonDBContext();
         ArrayList<Lesson> lessons = ldbc.getTimeTable(sid, from, to);
+//        ArrayList<Lesson> lessons = ldbc.getTimeTable(sid, Date.valueOf(from2), Date.valueOf(to2));
+//        System.out.println("hello");
+//        for (Lesson lesson : lessons) {
+//            System.out.println(lesson);
+//        }
+        
+        request.setAttribute("sid", sid);
         request.setAttribute("lessons", lessons);
-        request.getRequestDispatcher("../view/function/timetable.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/function/timetable.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,9 +87,13 @@ public class TimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, User user)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(TimetableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -77,9 +105,13 @@ public class TimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, User user)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(TimetableController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

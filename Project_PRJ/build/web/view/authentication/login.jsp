@@ -13,6 +13,7 @@
     </head>
     <body>
         <form action="login" method="POST">
+            <input type="hidden"  name="uid" value="${sessionScope.user2.uid}">
             <label for="email">Username:</label>
             <input type="text" id="username" name="username" required>
 

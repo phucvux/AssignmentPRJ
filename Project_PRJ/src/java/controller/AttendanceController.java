@@ -4,6 +4,7 @@
  */
 package controller;
 
+import controller.authentic.BaseRequiredAuthenticatedController;
 import dal.DBContext;
 import dal.ListCourseDBContext;
 import dal.StatusDBContext;
@@ -16,14 +17,13 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import model.Course;
 import model.Lesson;
-
-
+import model.User;
 
 /**
  *
  * @author CucLe
  */
-public class AttendanceController extends HttpServlet {
+public class AttendanceController extends BaseRequiredAuthenticatedController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,13 +36,18 @@ public class AttendanceController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                DBContext<Course> db = new ListCourseDBContext();
+        User u = (User) request.getSession().getAttribute("user");
+        int sid = u.getUid();
+
+        DBContext<Course> db = new ListCourseDBContext();
         ArrayList<Course> courses = db.all();
         request.setAttribute("courses", courses);
-        DBContext<Lesson> ls = new StatusDBContext();
-        ArrayList<Lesson> lessons = ls.all();
+
+        StatusDBContext ls = new StatusDBContext();
+        ArrayList<Lesson> lessons = ls.getSid(sid);
+        request.setAttribute("sid", sid);
         request.setAttribute("lessons", lessons);
-        request.getRequestDispatcher("../view/function/attendance.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/function/attendance.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -55,7 +60,7 @@ public class AttendanceController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response, User user)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -69,7 +74,7 @@ public class AttendanceController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response, User user)
             throws ServletException, IOException {
         processRequest(request, response);
     }

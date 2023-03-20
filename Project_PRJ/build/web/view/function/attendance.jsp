@@ -25,8 +25,20 @@
         </style>
     </head>
     <body>
-        <h1>Attendance Report</h1>
-        <form method="post">
+       
+        <div>
+            <ul style="list-style-type: none">
+                <li>
+                    <a href="home">HOME</a>
+                </li>
+                <li>
+                    <a href="timetable">WEEKLY TIMETABLE</a>
+                </li>
+            </ul>
+        </div>
+         <h1>Attendance Report</h1>
+        <form method="post" action="attendance">
+            <input type="hidden" name="sid" value="${sid}">
             <label for="courseSelect">Select a course:</label>
             <select id="courseSelect" name="courseSelect">
                 <option value="">--Select a course--</option>
@@ -54,16 +66,13 @@
                             <c:forEach items="${l.status}" var="s">
                                 <td>${s.date}</td>
                             </c:forEach>
-                            <<td>${l.timeslot.slot_name}</td>
+                            <td>${l.timeslot.slot_name}</td>
                             <c:forEach items="${l.status}" var="s">
                                 <c:if test="${s.status}">
                                     <td style="color: green">present</td>
-                                </c:if>
+                                </c:if>  
                                 <c:if test="${s.status == '0'}">
                                     <td style="color: red">absent</td>
-                                </c:if>
-                                <c:if test="${s.status == null}">
-                                    <td>not yet</td>
                                 </c:if>
                             </c:forEach>
                         </tr>

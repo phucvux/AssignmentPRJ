@@ -13,8 +13,19 @@ import java.util.ArrayList;
 public class Student {
     private int sid;
     private int sname;
+    private User user;
     private ArrayList<Checkstatus> status = new ArrayList<>();
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
+    
     public ArrayList<Checkstatus> getStatus() {
         return status;
     }

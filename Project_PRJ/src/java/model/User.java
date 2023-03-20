@@ -9,8 +9,26 @@ package model;
  * @author CucLe
  */
 public class User {
+    private int uid;
     private String username;
     private String password;
+    private Student student;
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+    
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 
     public String getUsername() {
         return username;
@@ -26,6 +44,11 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "uid=" + uid + ", username=" + username + ", password=" + password + ", student=" + student + '}';
     }
     
     

@@ -19,7 +19,7 @@ import model.User;
 public class UserDBContext extends DBContext<User>{
     
      public User get(String username, String password) {
-        String sql = "SELECT username FROM [User] \n"
+        String sql = "SELECT uid, username FROM [User] \n"
                 + "WHERE username = ? AND [password] =?";
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -31,7 +31,8 @@ public class UserDBContext extends DBContext<User>{
             if(rs.next())
             {
                 User s = new User();
-                s.setUsername(username);
+                s.setUid(rs.getInt("uid"));
+                s.setUsername(rs.getString("username"));
                 return s;
             }
         } catch (SQLException ex) {
@@ -56,6 +57,11 @@ public class UserDBContext extends DBContext<User>{
         }
         return null;
      }
+     
+      public static void main(String[] args) {
+        User u = new UserDBContext().get("phucvux", "1");
+          System.out.println(u);
+    }
 
     @Override
     public void insert(User model) {
@@ -81,5 +87,7 @@ public class UserDBContext extends DBContext<User>{
     public ArrayList<User> all() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
+   
     
 }

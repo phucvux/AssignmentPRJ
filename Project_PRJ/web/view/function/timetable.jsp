@@ -30,30 +30,40 @@
         </style>
     </head>
     <body>
+        
+        <a href="home">HOME</a><br>
+        <a href="attendance">ATTENDANCE</a><br>
+        <h1>Weekly Timetable</h1>
         <table border="1px"> 
             <tr>
-                <td></td>
-                <c:forEach items="${requestScope.dates}" var="d">
-                    <td>${d}<br/><fmt:formatDate value="${d}" pattern="EEEE"/>
+                <td>
+                    <form method="post" action="timetable">
+                        <input type="hidden" name="sid" value="${sid}">
+                        <label for="date">Choose a date:</label>
+                        <input type="date" id="date" name="date" placeholder="yyyy-mm-dd" required>
+                        <br>
+                        <button type="submit">Show week</button>
+                    </form>
+                    <c:forEach items="${weekDays}" var="w">
+                       <td>${w}<br/><fmt:formatDate value="${w}" pattern="EEEE"/>
                     </td>
-                </c:forEach>
-
+                    </c:forEach>
+                </td>
+              
+                    
             </tr>
             <c:forEach items="${requestScope.slots}" var="slot"> 
                 <tr>
                     <td>${slot.slot_name}</td>
-                    <c:forEach items="${requestScope.dates}" var="d">
+                    <c:forEach items="${weekDays}" var="w">
                         <td>
                             <c:forEach items="${requestScope.lessons}" var="l">
                                 <c:forEach items="${l.status}" var="s">
-                                    <c:if test="${s.date eq d and l.timeslot.tid eq slot.tid}">
+                                    <c:if test="${s.date eq w and l.timeslot.tid eq slot.tid}">
                                         ${l.course.cname}<br/>
                                         ${l.room.rname}<br/>    
                                         <c:if test="${s.status}">
                                             present
-                                        </c:if>
-                                        <c:if test="${s.status == null}">
-                                            not yet
                                         </c:if>
                                         <c:if test="${s.status == '0'}">
                                             absent

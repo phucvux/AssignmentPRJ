@@ -11,15 +11,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-   <body>
-	<h1>Student Management</h1>
-	
-	<nav>
-		<ul>
-			<li><a href="timetable">Class Time Table</a></li>
-			<li><a href="attendance">Attendance</a></li>
-		</ul>
-	</nav>
-	
-</body>
+    <body>
+        <h1>Student Management</h1>
+            <nav style="list-style-type: none">
+                <ul>
+                    <li><a href="timetable">Class Time Table</a></li>
+                    <li><a href="attendance">Attendance</a></li>
+                    <li><a href="logout">Logout</a></li>
+                </ul>
+            </nav>
+
+    </body>
 </html>

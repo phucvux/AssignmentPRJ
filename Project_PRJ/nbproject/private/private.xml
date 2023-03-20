@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/JAVA/AssignmentPRJ/Project_PRJ/web/view/function/attendance.jsp</file>
-            <file>file:/D:/JAVA/AssignmentPRJ/Project_PRJ/src/java/dal/StatusDBContext.java</file>
-            <file>file:/D:/JAVA/AssignmentPRJ/Project_PRJ/src/java/controller/AttendanceController.java</file>
+            <file>file:/D:/JAVA/AssignmentPRJ/Project_PRJ/src/java/dal/LessonDBContext.java</file>
+            <file>file:/D:/JAVA/AssignmentPRJ/Project_PRJ/src/java/controller/TimetableController.java</file>
+            <file>file:/D:/JAVA/AssignmentPRJ/Project_PRJ/web/view/function/timetable.jsp</file>
+            <file>file:/D:/JAVA/AssignmentPRJ/Project_PRJ/src/java/controller/authentic/LoginController.java</file>
+            <file>file:/D:/JAVA/AssignmentPRJ/Project_PRJ/web/view/authentication/login.jsp</file>
         </group>
     </open-files>
 </project-private>

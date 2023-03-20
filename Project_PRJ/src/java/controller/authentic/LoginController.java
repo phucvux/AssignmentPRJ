@@ -46,21 +46,23 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String uid = request.getParameter("uid");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        UserDBContext db = new UserDBContext();
+        UserDBContext db = new UserDBContext();    
         User user = db.get(username, password);
         if(user != null)
         {
             request.getSession().setAttribute("user", user);
-            response.sendRedirect("student_manage/home");
+            response.sendRedirect("home");
+            
         }
         else
         {
             response.getWriter().println("login failed!");
         }
     }
-
+    
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

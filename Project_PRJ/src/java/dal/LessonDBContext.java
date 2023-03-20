@@ -60,7 +60,8 @@ public class LessonDBContext extends DBContext<Lesson> {
                     + "                 room.rname,\n"
                     + "			checkstatus.date,\n"
                     + "			checkstatus.status,\n"
-                    + "                  timeslot.tid		\n"                
+                    + "                  timeslot.tid	,	\n"
+                    +"                  lesson.lid"
                     + "   from lesson\n"
                     + "                  join room on lesson.rid = room.rid\n"
                     + "                  join timeslot on lesson.tid = timeslot.tid\n"
@@ -77,7 +78,7 @@ public class LessonDBContext extends DBContext<Lesson> {
 
             while (rs.next()) {
                 Lesson l = new Lesson();
-                
+                l.setLid(rs.getInt("lid"));
                 Timeslot t = new Timeslot();
                 t.setTid(rs.getInt("tid"));
                 t.setSlot_name(rs.getString("slot_name"));
@@ -110,5 +111,12 @@ public class LessonDBContext extends DBContext<Lesson> {
             }
         }
         return lessons;
+    }
+    
+    public static void main(String[] args) {
+          ArrayList<Lesson> lessons = new LessonDBContext().getTimeTable(1, Date.valueOf("2023-03-18"), Date.valueOf("2023-03-24"));
+          for (Lesson lesson : lessons) {
+              System.out.println(lesson.toString());
+        }
     }
 }

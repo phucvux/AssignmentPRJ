@@ -20,6 +20,11 @@ public class Lesson {
     private Group group;
     private ArrayList<Checkstatus> status = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Lesson{" + "lid=" + lid + ", lname=" + lname + ", instructor=" + instructor + ", timeslot=" + timeslot + ", room=" + room + ", course=" + course + ", group=" + group + ", status=" + status + '}';
+    }
+
     public ArrayList<Checkstatus> getStatus() { 
         return status;
     }

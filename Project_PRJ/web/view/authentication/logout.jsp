@@ -26,6 +26,7 @@
             if(count <= 0 )
             {
                 window.location.href = 'login';
+                
             }
         }
         setInterval(counting,1000);
